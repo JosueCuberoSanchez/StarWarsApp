@@ -1,0 +1,25 @@
+/*
+ Localizable.strings
+ StarWarsApp
+ 
+ Created by Josue on 1/14/19.
+ Copyright © 2019 Josue. All rights reserved.
+ */
+
+// UI Messages
+"loading_message" = "Loading...";
+
+// Label texts
+"name_format" = "Name: %@";
+"gender_format" = "Gender: %@";
+"height_format" = "Height: %@ ft";
+"average_height_format" = "Average height: %@ ft";
+"length_format" = "Length: %@";
+"homeworld_format" = "Homeworld: %@";
+"manufacturer_format" = "Manufacturer: %@";
+"passengers_format" = "Passengers: %@";
+"class_format" = "Class: %@";
+"classification_format" = "Class: %@";
+"language_format" = "Language: %@";
+
+

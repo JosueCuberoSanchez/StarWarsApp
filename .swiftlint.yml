@@ -1,0 +1,4 @@
+excluded: 
+  - Pods
+  - R.generated.swift
+  - StarWarsApp/Helpers/Reactive/ActivityIndicator.swift

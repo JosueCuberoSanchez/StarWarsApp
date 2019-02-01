@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Nr-N6-Bxb">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="StarJediSpecialEdition.ttf">
+            <string>StarJediSpecialEdition</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Species Table View Controller-->
+        <scene sceneID="ASa-2Z-PYi">
+            <objects>
+                <tableViewController id="uTX-4o-0aZ" customClass="SpeciesTableViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="heB-vD-LfX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="AHU-KE-DZH">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TabListTableViewCell" rowHeight="72" id="Xwq-MS-Hfo" customClass="TabListTableViewCell" customModule="StarWarsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xwq-MS-Hfo" id="Pwa-cG-jkW">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Specie name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBI-7r-e4Z">
+                                            <rect key="frame" x="93" y="11" width="119" height="17"/>
+                                            <fontDescription key="fontDescription" name="StarJediSpecialEdition" family="StarJedi Special Edition" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Specie classification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S61-mK-x3F">
+                                            <rect key="frame" x="93" y="36" width="161.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="StarJediSpecialEdition" family="StarJedi Special Edition" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="row-darth-vader" translatesAutoresizingMaskIntoConstraints="NO" id="hTb-rg-LkG">
+                                            <rect key="frame" x="16" y="9" width="61" height="52"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="61" id="Wut-Ue-6hB"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="S61-mK-x3F" firstAttribute="leading" secondItem="hTb-rg-LkG" secondAttribute="trailing" constant="16" id="4fN-WH-XHA"/>
+                                        <constraint firstItem="hTb-rg-LkG" firstAttribute="leading" secondItem="Pwa-cG-jkW" secondAttribute="leadingMargin" id="4fy-vZ-hbX"/>
+                                        <constraint firstItem="vBI-7r-e4Z" firstAttribute="top" secondItem="Pwa-cG-jkW" secondAttribute="topMargin" id="5vj-Dl-H1C"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vBI-7r-e4Z" secondAttribute="trailing" constant="20" symbolic="YES" id="FhU-Gl-GqJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="S61-mK-x3F" secondAttribute="bottom" constant="4" id="GuL-sQ-SbM"/>
+                                        <constraint firstItem="vBI-7r-e4Z" firstAttribute="leading" secondItem="hTb-rg-LkG" secondAttribute="trailing" constant="16" id="Hje-Le-zIs"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S61-mK-x3F" secondAttribute="trailing" constant="20" symbolic="YES" id="KSQ-3g-xVb"/>
+                                        <constraint firstItem="hTb-rg-LkG" firstAttribute="bottom" secondItem="Pwa-cG-jkW" secondAttribute="bottomMargin" id="RDs-8n-j8c"/>
+                                        <constraint firstItem="hTb-rg-LkG" firstAttribute="top" secondItem="Pwa-cG-jkW" secondAttribute="top" constant="9" id="cJz-me-6Ja"/>
+                                        <constraint firstItem="S61-mK-x3F" firstAttribute="top" secondItem="vBI-7r-e4Z" secondAttribute="bottom" constant="8" id="q7h-gF-hdr"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="S61-mK-x3F" id="bTv-b2-Iew"/>
+                                    <outlet property="nameLabel" destination="vBI-7r-e4Z" id="ERA-Li-jzU"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uTX-4o-0aZ" id="Ebh-W4-EHl"/>
+                            <outlet property="delegate" destination="uTX-4o-0aZ" id="Giv-0v-I0G"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Tl9-d8-aN3"/>
+                    <connections>
+                        <outlet property="searchBar" destination="AHU-KE-DZH" id="BGz-9v-fmd"/>
+                        <segue destination="Jbm-qt-BeP" kind="show" identifier="seeSpecieDetailsSegue" id="MqK-bX-XKp"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Koz-Xh-Bts" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1360.8" y="554.57271364317842"/>
+        </scene>
+        <!--Starship View Controller-->
+        <scene sceneID="w1n-y2-Vc6">
+            <objects>
+                <viewController id="0Ox-IE-wlt" customClass="StarshipViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hzI-mK-OgC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="nbe-HN-cPo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ayT-TP-t4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2126" y="-116"/>
+        </scene>
+        <!--Specie View Controller-->
+        <scene sceneID="eda-Ed-z83">
+            <objects>
+                <viewController id="Jbm-qt-BeP" customClass="SpecieViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fDx-ae-tzu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8Ba-IU-xwT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bTE-ac-ZeO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2126" y="555"/>
+        </scene>
+        <!--Person View Controller-->
+        <scene sceneID="Pem-GZ-tno">
+            <objects>
+                <viewController storyboardIdentifier="personViewController" id="Kep-nq-eyk" customClass="PersonViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lIw-fn-uBX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2rG-VP-oCZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="74n-t2-buH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2126" y="-790"/>
+        </scene>
+        <!--People Table View Controller-->
+        <scene sceneID="Hq7-UK-sBP">
+            <objects>
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="gnd-OQ-b9Z" customClass="PeopleTableViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ASd-K5-cKE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="xa4-kR-6sB">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TabListTableViewCell" rowHeight="72" id="syy-GQ-If6" customClass="TabListTableViewCell" customModule="StarWarsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="syy-GQ-If6" id="1Iu-sc-Mds">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Character name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7B-QQ-4Zs">
+                                            <rect key="frame" x="93" y="11" width="164" height="17"/>
+                                            <fontDescription key="fontDescription" name="StarJediSpecialEdition" family="StarJedi Special Edition" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcV-uL-zNq">
+                                            <rect key="frame" x="93" y="36" width="143.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="StarJediSpecialEdition" family="StarJedi Special Edition" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="row-r2d2" translatesAutoresizingMaskIntoConstraints="NO" id="cxX-pT-2XP">
+                                            <rect key="frame" x="16" y="9" width="61" height="52"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="61" id="naO-iG-Nba"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="cxX-pT-2XP" firstAttribute="top" secondItem="1Iu-sc-Mds" secondAttribute="top" constant="9" id="5dd-Qw-joG"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gcV-uL-zNq" secondAttribute="trailing" constant="20" symbolic="YES" id="DBC-Gv-2HN"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W7B-QQ-4Zs" secondAttribute="trailing" constant="20" symbolic="YES" id="P8C-Mx-Qp8"/>
+                                        <constraint firstItem="gcV-uL-zNq" firstAttribute="top" secondItem="W7B-QQ-4Zs" secondAttribute="bottom" constant="8" id="Qaz-7J-iKN"/>
+                                        <constraint firstItem="cxX-pT-2XP" firstAttribute="leading" secondItem="1Iu-sc-Mds" secondAttribute="leadingMargin" id="a38-cT-tFE"/>
+                                        <constraint firstItem="W7B-QQ-4Zs" firstAttribute="top" secondItem="1Iu-sc-Mds" secondAttribute="topMargin" id="fxR-8C-bqw"/>
+                                        <constraint firstItem="gcV-uL-zNq" firstAttribute="leading" secondItem="cxX-pT-2XP" secondAttribute="trailing" constant="16" id="h5N-gE-wXR"/>
+                                        <constraint firstItem="cxX-pT-2XP" firstAttribute="bottom" secondItem="1Iu-sc-Mds" secondAttribute="bottomMargin" id="l7n-fl-lEZ"/>
+                                        <constraint firstItem="W7B-QQ-4Zs" firstAttribute="leading" secondItem="cxX-pT-2XP" secondAttribute="trailing" constant="16" id="lNl-Cq-rhK"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="gcV-uL-zNq" secondAttribute="bottom" constant="4" id="vfH-tf-krB"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="gcV-uL-zNq" id="pf4-B8-6Jm"/>
+                                    <outlet property="nameLabel" destination="W7B-QQ-4Zs" id="E9N-6p-kgq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gnd-OQ-b9Z" id="r0e-w9-uv3"/>
+                            <outlet property="delegate" destination="gnd-OQ-b9Z" id="xgp-My-UFt"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wAO-O0-Q4f"/>
+                    <connections>
+                        <outlet property="searchBar" destination="xa4-kR-6sB" id="3kE-4a-uaG"/>
+                        <outlet property="tableView" destination="ASd-K5-cKE" id="byd-yb-mTV"/>
+                        <segue destination="Kep-nq-eyk" kind="show" identifier="seePersonDetailsSegue" id="EX6-Vm-cdX"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xPP-ZC-iZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1360.8" y="-790.25487256371821"/>
+        </scene>
+        <!--Starships Table View Controller-->
+        <scene sceneID="MY4-k6-i55">
+            <objects>
+                <tableViewController id="bVN-bL-hZa" customClass="StarshipsTableViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VNy-aA-Bzp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="H7P-NA-gr6">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TabListTableViewCell" rowHeight="72" id="bPD-jt-UYJ" customClass="TabListTableViewCell" customModule="StarWarsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bPD-jt-UYJ" id="gu9-iz-7fp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Starship name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9Q-hh-b5a">
+                                            <rect key="frame" x="93" y="11" width="142" height="17"/>
+                                            <fontDescription key="fontDescription" name="StarJediSpecialEdition" family="StarJedi Special Edition" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starship manufacturer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAV-tt-45Q">
+                                            <rect key="frame" x="93" y="36" width="183" height="21"/>
+                                            <fontDescription key="fontDescription" name="StarJediSpecialEdition" family="StarJedi Special Edition" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="row-starship" translatesAutoresizingMaskIntoConstraints="NO" id="rD2-3M-c4i">
+                                            <rect key="frame" x="16" y="9" width="61" height="52"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="61" id="oJZ-oq-3u4"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rD2-3M-c4i" firstAttribute="leading" secondItem="gu9-iz-7fp" secondAttribute="leadingMargin" id="DWN-pT-Kha"/>
+                                        <constraint firstItem="l9Q-hh-b5a" firstAttribute="top" secondItem="gu9-iz-7fp" secondAttribute="topMargin" id="GLF-QG-16N"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="dAV-tt-45Q" secondAttribute="bottom" constant="4" id="Imi-6K-13K"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dAV-tt-45Q" secondAttribute="trailing" constant="20" symbolic="YES" id="dRL-zX-8m1"/>
+                                        <constraint firstItem="dAV-tt-45Q" firstAttribute="leading" secondItem="rD2-3M-c4i" secondAttribute="trailing" constant="16" id="hXS-hq-LTi"/>
+                                        <constraint firstItem="dAV-tt-45Q" firstAttribute="top" secondItem="l9Q-hh-b5a" secondAttribute="bottom" constant="8" id="m0C-94-TWN"/>
+                                        <constraint firstItem="rD2-3M-c4i" firstAttribute="top" secondItem="gu9-iz-7fp" secondAttribute="top" constant="9" id="n3g-Xc-oOr"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="l9Q-hh-b5a" secondAttribute="trailing" constant="20" symbolic="YES" id="q03-pT-TWk"/>
+                                        <constraint firstItem="l9Q-hh-b5a" firstAttribute="leading" secondItem="rD2-3M-c4i" secondAttribute="trailing" constant="16" id="sXy-MY-uFs"/>
+                                        <constraint firstItem="rD2-3M-c4i" firstAttribute="bottom" secondItem="gu9-iz-7fp" secondAttribute="bottomMargin" id="z4a-uh-B5z"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="dAV-tt-45Q" id="uSS-wA-nWe"/>
+                                    <outlet property="nameLabel" destination="l9Q-hh-b5a" id="EYC-JD-geX"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bVN-bL-hZa" id="m5P-kn-PlL"/>
+                            <outlet property="delegate" destination="bVN-bL-hZa" id="EGP-IH-uG0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="azh-D8-FFb"/>
+                    <connections>
+                        <outlet property="searchBar" destination="H7P-NA-gr6" id="GEw-Gc-JPi"/>
+                        <segue destination="0Ox-IE-wlt" kind="show" identifier="seeStarshipDetailsSegue" id="Q5a-Ad-wYf"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4i-iI-FOF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1360.8" y="-116.49175412293854"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="Hvy-dy-pSf">
+            <objects>
+                <viewController id="1Nr-N6-Bxb" customClass="LoginViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oaE-Hb-PrX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mp3-1i-MiX"/>
+                    </view>
+                    <connections>
+                        <segue destination="xbD-CR-WGV" kind="show" identifier="seeTabBarViewSegue" id="aWu-cI-oSW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0EJ-ZA-B4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1241" y="-116"/>
+        </scene>
+        <!--Tab Bar View Controller-->
+        <scene sceneID="W4n-Fb-E3u">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBarViewController" id="xbD-CR-WGV" customClass="TabBarViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="par-nn-BQL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="LXZ-ou-GO0" kind="relationship" relationship="viewControllers" id="GNz-au-J22"/>
+                        <segue destination="zDB-Z4-pN7" kind="relationship" relationship="viewControllers" id="UDc-W2-g0q"/>
+                        <segue destination="txQ-1v-BvD" kind="relationship" relationship="viewControllers" id="z5K-Ee-d6u"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wDY-yw-hwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-360" y="-115"/>
+        </scene>
+        <!--People-->
+        <scene sceneID="v1T-fH-yde">
+            <objects>
+                <navigationController storyboardIdentifier="People" title="People" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LXZ-ou-GO0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="People" image="tab-darth-vader" id="lAK-qc-0xb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RR3-vu-Bfo">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gnd-OQ-b9Z" kind="relationship" relationship="rootViewController" id="gl1-Jb-MJR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O9F-VH-FsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="590" y="-790"/>
+        </scene>
+        <!--Starships-->
+        <scene sceneID="ELk-aM-9MM">
+            <objects>
+                <navigationController storyboardIdentifier="Starships" title="Starships" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zDB-Z4-pN7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Starships" image="tab-millennium-falcon" id="CdA-PD-VK6"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="B4U-6U-KDZ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bVN-bL-hZa" kind="relationship" relationship="rootViewController" id="FT4-Xo-IbF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iUz-9N-o3n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="589.60000000000002" y="-116.49175412293854"/>
+        </scene>
+        <!--Species-->
+        <scene sceneID="XUx-vS-KUL">
+            <objects>
+                <navigationController storyboardIdentifier="Species" title="Species" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="txQ-1v-BvD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Species" image="tab-death-star" id="OHa-MU-etV"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Xy-oi-ed6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uTX-4o-0aZ" kind="relationship" relationship="rootViewController" id="f3T-ld-lg7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0sZ-GE-RnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="589.60000000000002" y="556.37181409295351"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="row-darth-vader" width="48" height="48"/>
+        <image name="row-r2d2" width="48" height="48"/>
+        <image name="row-starship" width="48" height="48"/>
+        <image name="tab-darth-vader" width="24" height="24"/>
+        <image name="tab-death-star" width="24" height="24"/>
+        <image name="tab-millennium-falcon" width="24" height="24"/>
+    </resources>
+</document>
