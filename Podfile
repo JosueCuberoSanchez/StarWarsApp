@@ -2,7 +2,7 @@
 
 platform :ios, '11.0'
 use_frameworks!
-
+inhibit_all_warnings!
 
 target 'StarWarsApp' do
 
@@ -10,6 +10,7 @@ target 'StarWarsApp' do
   pod 'RxCocoa',    '~> 4.0'
   pod 'R.swift'
   pod 'SwiftLint'
+  pod 'RxOptional'
 
   target 'StarWarsAppTests' do
 

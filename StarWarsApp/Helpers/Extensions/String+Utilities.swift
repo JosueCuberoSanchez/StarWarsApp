@@ -13,10 +13,14 @@ extension String {
     /**
      Gets the resource of a url. Ex: https://swapi.com/planets/12 -> planets/12
      */
-    var resourcePath: String {
+    var resourcePath: String? {
         let components = self.dropLast().components(separatedBy: "/")
-        let resource = components[components.count-2]
-        let index = components[components.count-1]
+        
+        let count = components.count
+        guard count > 2 else { return nil }
+        
+        let resource = components[count-2]
+        let index = components[count-1]
         return "\(resource)/\(index)"
     }
 

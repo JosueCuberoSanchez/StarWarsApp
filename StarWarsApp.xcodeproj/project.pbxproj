@@ -54,6 +54,7 @@
 		CAA828AF21EE79A900027BAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA828AE21EE79A900027BAD /* Main.storyboard */; };
 		CAA828B121EE79CA00027BAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA828B021EE79CA00027BAD /* LaunchScreen.storyboard */; };
 		CAA828C321EE7D5400027BAD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAA828C121EE7D5400027BAD /* Localizable.strings */; };
+		CAB8A2AF22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB8A2AE22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift */; };
 		CAC4421821FA735A00D9EEEA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4421721FA735A00D9EEEA /* TabBarViewController.swift */; };
 		CAC4421D21FB458C00D9EEEA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4421C21FB458C00D9EEEA /* LoginViewController.swift */; };
 		CAC4421F21FB677000D9EEEA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4421E21FB677000D9EEEA /* LoginViewModel.swift */; };
@@ -155,6 +156,7 @@
 		CAA828AE21EE79A900027BAD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CAA828B021EE79CA00027BAD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CAA828C221EE7D5400027BAD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		CAB8A2AE22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrimitiveSequence+Extensions.swift"; sourceTree = "<group>"; };
 		CAC4421721FA735A00D9EEEA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CAC4421C21FB458C00D9EEEA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CAC4421E21FB677000D9EEEA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				CA84F21021FF90E300A9B440 /* UIImageView+Dissolve.swift */,
 				CA84F218220098F000A9B440 /* UICollectionView+RegisterDequeue.swift */,
 				CA84F2292200EDD700A9B440 /* Class+Name.swift */,
+				CAB8A2AE22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -677,9 +680,11 @@
 				TargetAttributes = {
 					CA12BA0721E39CA400DF6CC5 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1100;
 					};
 					CA752C8D21F0C07F00B4C3F3 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1100;
 						TestTargetID = CA12BA0721E39CA400DF6CC5;
 					};
 					CA752C9D21F0CF1800B4C3F3 = {
@@ -771,6 +776,7 @@
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
@@ -782,6 +788,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
@@ -839,6 +846,7 @@
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -848,6 +856,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -936,6 +945,7 @@
 				CA84F21F2200B39A00A9B440 /* GenericTableViewController.swift in Sources */,
 				CAE2B55721F78252003E7043 /* SpecieViewController+Layout.swift in Sources */,
 				CAC4422621FB748200D9EEEA /* Credentials.swift in Sources */,
+				CAB8A2AF22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift in Sources */,
 				CA84F2232200C33400A9B440 /* BaseViewModel.swift in Sources */,
 				CA12BA0C21E39CA400DF6CC5 /* AppDelegate.swift in Sources */,
 				CAC4422321FB6B9100D9EEEA /* LoginResource.swift in Sources */,
@@ -1125,7 +1135,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.StarWarsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1147,7 +1157,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.StarWarsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1158,7 +1168,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C54FN86J54;
+				DEVELOPMENT_TEAM = 3MGY52W5SY;
 				INFOPLIST_FILE = StarWarsAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1167,7 +1177,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.StarWarsAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarWarsApp.app/StarWarsApp";
 			};
@@ -1179,7 +1189,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C54FN86J54;
+				DEVELOPMENT_TEAM = 3MGY52W5SY;
 				INFOPLIST_FILE = StarWarsAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1188,7 +1198,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.StarWarsAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarWarsApp.app/StarWarsApp";
 			};

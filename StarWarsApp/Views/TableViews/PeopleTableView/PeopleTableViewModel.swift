@@ -35,10 +35,12 @@ class PeopleTableViewModel: BaseViewModel {
             }
         }
 
+        let activityIndicator = self.activityIndicator
+        
         /* cuando este request comienza es por que el trigger lo dejo pasar por estar en F, 
          entonces el track cambia el AI de F a V, para no dejar pasar a nadie mas.*/
-        let sharedRequest =
-            pagination.flatMap { request($0).trackActivity(self.activityIndicator) }.share()
+        let sharedRequest = pagination
+            .flatMap { request($0).trackActivity(activityIndicator) }.share()
         /* cuando este request termina, el track activity se encargar de hacerle decrement 
          al activity indicator, pasando de V a F*/
         let peopleResponse = sharedRequest.mapSuccess()
@@ -52,11 +54,12 @@ class PeopleTableViewModel: BaseViewModel {
         /* trigger for next page loads, triggers the first time because it has a value already.
          next triggers are made by the view controller, and pagination changes (+1) making 
          the shared request trigger the next page load.*/
+        let maxPage = self.maxPage
         nextPageTrigger
             .withLatestFrom(activityIndicator)
             .filter { !$0 }
             .withLatestFrom(pagination) { $1 + 1 }
-            .filter { $0 < self.maxPage }
+            .filter { $0 < maxPage }
             .asDriver(onErrorDriveWith: Driver.empty())
             .drive(pagination)
             .disposed(by: disposeBag)

@@ -30,8 +30,12 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginViewModel =
-            LoginViewModel(request: { LoginResource($0).execute(with: self.apiClient, using: self.jsonDecoder) })
+        loginViewModel = LoginViewModel(
+            request: { [weak self] in
+                guard let sself = self else { return Driver.empty() }
+                return LoginResource($0).execute(with: sself.apiClient, using: sself.jsonDecoder)
+            }
+        )
         setupBindings()
     }
 
@@ -41,9 +45,10 @@ class LoginViewController: UIViewController {
     private func setupBindings() {
         emailTextField.rx.text
             .orEmpty
-            .subscribe(onNext: { [weak self] in
-                self?.loginViewModel.email.accept($0)
-            })
+            .bind(to: loginViewModel.email)
+//            .subscribe(onNext: { [weak self] in
+//                self?.loginViewModel.email.accept($0)
+//            })
             .disposed(by: disposeBag)
 
         passwordTextField.rx.text
@@ -61,7 +66,7 @@ class LoginViewController: UIViewController {
 
         loginViewModel.loginFailure
             .drive(onNext: { [weak self] error in
-                print(error.debugDescription)
+                print(error.localizedDescription)
                 self?.setErrorBordersForInputFields()
             })
             .disposed(by: disposeBag)

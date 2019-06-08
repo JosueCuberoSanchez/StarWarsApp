@@ -2,3 +2,6 @@ excluded:
   - Pods
   - R.generated.swift
   - StarWarsApp/Helpers/Reactive/ActivityIndicator.swift
+
+disabled_rules:
+    - trailing_whitespace

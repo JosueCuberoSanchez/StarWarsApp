@@ -19,9 +19,7 @@ struct LoginResource: Request {
     var path = "login/"
     var index: Int?
     var parameters: [String: String]?
-    var method: Method {
-        return .POST
-    }
+    var method: Method = .POST
     var body: [String: Any]?
 
 }

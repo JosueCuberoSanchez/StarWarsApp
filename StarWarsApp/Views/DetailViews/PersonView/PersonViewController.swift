@@ -41,7 +41,10 @@ class PersonViewController: UIViewController, UIScrollViewDelegate, UICollection
         self.apiClient = apiClient
         super.init(nibName: nil, bundle: nil)
         personViewModel = PersonViewModel(
-            request: { PlanetResource($0).execute(with: self.apiClient, using: JSONDecoder()) },
+            request: { [weak self] in
+                guard let sself = self else { return Driver.empty() }
+                return PlanetResource($0).execute(with: sself.apiClient, using: JSONDecoder())
+            },
             person: person
         )
     }

@@ -19,9 +19,7 @@ struct PlanetResource: Request {
     var path: String
     var index: Int?
     var parameters: [String: String]?
-    var method: Method {
-        return .GET
-    }
+    var method: Method = .GET
     var body: [String: Any]?
 
 }

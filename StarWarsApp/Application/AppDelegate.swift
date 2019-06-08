@@ -14,14 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
 
-    // Global dependencies
-    let jsonDecoder = JSONDecoder()
-
     // swiftlint:disable:next line_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        if let loginView = window?.rootViewController as? LoginViewController {
-            appCoordinator = AppCoordinator(viewController: loginView, jsonDecoder: jsonDecoder)
+        if let window = window {
+            appCoordinator = AppCoordinator(window: window, jsonDecoder: JSONDecoder())
             appCoordinator?.start()
         }
 

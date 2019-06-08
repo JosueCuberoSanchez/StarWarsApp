@@ -16,17 +16,16 @@ protocol TabBarCoordinatorDelegate: class {
 final class TabBarCoordinator: Coordinator {
 
     var childCoordinators = [Coordinator]()
-    let previousViewController: LoginViewController
 
-    var tabBarViewController: TabBarViewController!
+    let window: UIWindow
 
     weak var delegate: TabBarCoordinatorDelegate?
 
     let apiClient = APIClient(baseURL: "https://swapi.co/api/")
     let jsonDecoder: JSONDecoder
 
-    init(from previousViewController: LoginViewController, jsonDecoder: JSONDecoder) {
-        self.previousViewController = previousViewController
+    init(from window: UIWindow, jsonDecoder: JSONDecoder) {
+        self.window = window
         self.jsonDecoder = jsonDecoder
     }
 
@@ -35,16 +34,11 @@ final class TabBarCoordinator: Coordinator {
     }
 
     fileprivate func showTabBarController() {
-        if let tabBarViewController =
-            previousViewController.storyboard?.instantiateViewController(withIdentifier: "tabBarViewController")
-                as? TabBarViewController {
-
-            tabBarViewController.customDelegate = self
-            tabBarViewController.setDependencies(apiClient: apiClient,
-                                                 jsonDecoder: jsonDecoder)
-            previousViewController.present(tabBarViewController, animated: false)
-
-        }
+        let tabBarViewController = window.rootViewController?.storyboard?
+            .instantiateViewController(withIdentifier: "tabBarViewController") as? TabBarViewController
+        tabBarViewController?.customDelegate = self
+        tabBarViewController?.setDependencies(apiClient: apiClient, jsonDecoder: jsonDecoder)
+        window.rootViewController = tabBarViewController
     }
 
     fileprivate func showPersonViewController(of person: Person,

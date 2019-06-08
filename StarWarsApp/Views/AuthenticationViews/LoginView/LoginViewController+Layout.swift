@@ -110,15 +110,18 @@ extension LoginViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             // Logo view
-            logoView.widthAnchor.constraint(equalToConstant: 200),
+            logoView.leadingAnchor.constraint(equalTo: stackView.centerXAnchor, constant: -100),
+            logoView.trailingAnchor.constraint(equalTo: stackView.centerXAnchor, constant: 100),
             logoView.heightAnchor.constraint(equalToConstant: 100),
             // Email view
-            emailView.widthAnchor.constraint(equalToConstant: 300),
+            emailView.leadingAnchor.constraint(equalTo: stackView.centerXAnchor, constant: -150),
+            emailView.trailingAnchor.constraint(equalTo: stackView.centerXAnchor, constant: 150),
             emailView.heightAnchor.constraint(equalToConstant: 70),
             emailTextField.widthAnchor.constraint(equalTo: emailView.widthAnchor),
             emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5),
             // Password view
-            passwordView.widthAnchor.constraint(equalToConstant: 300),
+            passwordView.leadingAnchor.constraint(equalTo: stackView.centerXAnchor, constant: -150),
+            passwordView.trailingAnchor.constraint(equalTo: stackView.centerXAnchor, constant: 150),
             passwordView.heightAnchor.constraint(equalToConstant: 70),
             passwordTextField.widthAnchor.constraint(equalTo: passwordView.widthAnchor),
             passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 5)

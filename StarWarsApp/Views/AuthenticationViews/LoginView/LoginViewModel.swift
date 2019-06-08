@@ -18,7 +18,7 @@ class LoginViewModel {
     var loginTrigger = PublishRelay<Void>()
 
     var loginSuccess: Driver<LoginResponse>
-    var loginFailure: Driver<Error?>
+    var loginFailure: Driver<Error>
 
     init(request: @escaping (_ body: [String: Any]) -> Driver<Response<LoginResponse>>) {
         loginSuccess = Driver.empty()
@@ -39,7 +39,7 @@ class LoginViewModel {
         let errorResponse = sharedRequest.mapError()
 
         loginSuccess = credentialsResponse.map { $0 }.asDriver(onErrorDriveWith: Driver.empty())
-        loginFailure = errorResponse.map { $0 }.asDriver(onErrorDriveWith: Driver.empty())
+        loginFailure = errorResponse.filterNil().asDriver(onErrorDriveWith: Driver.empty())
     }
 
 }

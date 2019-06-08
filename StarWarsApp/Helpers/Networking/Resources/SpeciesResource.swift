@@ -24,9 +24,7 @@ struct SpeciesResource: Request {
         }
         return ["page": String(index)]
     }
-    var method: Method {
-        return .GET
-    }
+    var method: Method = .GET
     var body: [String: Any]?
 
 }
