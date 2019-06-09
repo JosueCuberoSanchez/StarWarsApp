@@ -16,16 +16,13 @@ enum Response<Value> {
 
 protocol ResponseProtocol {
     associatedtype Value
+    associatedtype Error
     func unwrapSuccess() throws -> Value
     func unwrapError() -> Error?
     var isSuccessful: Bool { get }
 }
 
 extension Response: ResponseProtocol {
-
-    /**
-     Gets the data from the Response, if it's an error throw it.
-     */
     func unwrapSuccess() throws -> Value {
         switch self {
         case .success(let model):
@@ -35,9 +32,6 @@ extension Response: ResponseProtocol {
         }
     }
 
-    /**
-     Gets the error from the Response, if it wasn't an error return an optional.
-     */
     func unwrapError() -> Error? {
         switch self {
         case .failure(let error):
@@ -47,9 +41,6 @@ extension Response: ResponseProtocol {
         }
     }
 
-    /**
-     If there is data on the response, return true, else false.
-     */
     var isSuccessful: Bool {
         switch self {
         case .success:
@@ -58,35 +49,4 @@ extension Response: ResponseProtocol {
             return false
         }
     }
-
-}
-
-extension ObservableType where E: ResponseProtocol {
-
-    /**
-     Gets the successful data from the response.
-     */
-    func mapSuccess() -> Observable<E.Value> {
-        return filter { $0.isSuccessful }.map { try $0.unwrapSuccess() }
-    }
-
-    /**
-     Gets the error from the response.
-     */
-    func mapError() -> Observable<Error?> {
-        return filter { !$0.isSuccessful }.map { $0.unwrapError() }
-    }
-
-}
-
-extension ObservableType where E: Decodable {
-
-    /**
-     Wraps a model type into Response.success.
-     - Returns: An observable of <Response<E>>, where E is the model.
-     */
-    func wrapSuccess() -> Observable<Response<E>> {
-        return map { Response.success($0) }
-    }
-
 }

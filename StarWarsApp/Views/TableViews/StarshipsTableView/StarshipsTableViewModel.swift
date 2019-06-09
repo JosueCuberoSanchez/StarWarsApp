@@ -14,42 +14,44 @@ class StarshipsTableViewModel: BaseViewModel {
 
     typealias Model = Starship
 
-    var pagination = BehaviorRelay<Int>(value: 1)
-    var activityIndicator = ActivityIndicator()
-    var itemsRelay = BehaviorRelay<[Model]>(value: [])
-    var nextPageTrigger = PublishRelay<Void>()
-    var filterSource = BehaviorRelay<String>(value: "")
-    var modelList: SharedSequence<DriverSharingStrategy, [Model]>
-    var maxPage = 5
+    let pagination = BehaviorRelay<Int>(value: 1)
+    let activityIndicator = ActivityIndicator()
+    let itemsRelay = BehaviorRelay<[Model]>(value: [])
+    let nextPageTrigger = PublishRelay<Void>()
+    let filterSource = BehaviorRelay<String>(value: "")
+    let modelList: SharedSequence<DriverSharingStrategy, [Model]>
+    let maxPage = 5
 
     private let disposeBag = DisposeBag()
 
     init(request: @escaping (_ page: Int) -> Driver<Response<StarshipsResponse>>) {
 
         modelList = Driver.combineLatest(itemsRelay.asDriver(), filterSource.asDriver()) { data, filter in
-            data.filter { starship in
-                guard filter != "" else {
-                    return true
-                }
-                return starship.name.lowercased().contains(filter.lowercased())
+            data.filter {
+                guard filter != "" else { return true }
+                return $0.name.lowercased().contains(filter.lowercased())
             }
         }
 
-        let sharedRequest =
-            pagination.flatMap { request($0).trackActivity(self.activityIndicator) }.share()
-        let starshipsResponse = sharedRequest.mapSuccess()
+        let activityIndicator = self.activityIndicator
+        let request = pagination.asDriver()
+            .flatMapLatest {
+                request($0).trackActivity(activityIndicator).asDriver(onErrorDriveWith: Driver.empty())
+            }
+        let starshipsResponse = request.unwrapSuccess()
 
         starshipsResponse.map { $0.starships }
-            .withLatestFrom(itemsRelay) { $1 + $0 }
+            .withLatestFrom(itemsRelay.asDriver()) { $1 + $0 }
             .asDriver(onErrorDriveWith: Driver.empty())
             .drive(itemsRelay)
             .disposed(by: disposeBag)
 
+        let maxPage = self.maxPage
         nextPageTrigger
             .withLatestFrom(activityIndicator)
             .filter { !$0 }
             .withLatestFrom(pagination) { $1 + 1 }
-            .filter { $0 < self.maxPage }
+            .filter { $0 < maxPage }
             .asDriver(onErrorDriveWith: Driver.empty())
             .drive(pagination)
             .disposed(by: disposeBag)

@@ -8,12 +8,18 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class PeopleTableViewController: GenericTableViewController<PeopleTableViewModel> {
 
     override func viewDidLoad() {
         viewModel =
-            PeopleTableViewModel(request: { PeopleResource($0).execute(with: self.apiClient, using: self.jsonDecoder) })
+            PeopleTableViewModel(
+                request: { [weak self] in
+                    guard let sself = self else { return Driver.empty() }
+                    return PeopleResource($0).execute(with: sself.apiClient, using: sself.jsonDecoder)
+                }
+            )
 
         super.viewDidLoad()
 

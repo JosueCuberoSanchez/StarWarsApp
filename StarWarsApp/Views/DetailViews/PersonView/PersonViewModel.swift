@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 class PersonViewModel {
-
     // Inputs
     private var personDriver: Driver<Person>
 
@@ -22,24 +21,17 @@ class PersonViewModel {
     var personHomeworld: Driver<String>
 
     init(request: @escaping (_ planetPath: String) -> Driver<Response<PlanetResponse>>, person: Person) {
+        personDriver = Driver.just(person)
 
-        // Asign personDriver
-        personDriver = Driver.of(person)
-
-        // Map homeworld driver
-        // Observable<Response<PlanetResponse>>
-        let sharedRequest = personDriver
+        let request = personDriver
             .map { $0.homeworld.resourcePath }
             .filterNil()
             .flatMapLatest { request($0) }
-        let planetResponse = sharedRequest.asObservable().mapSuccess()
+        let planetResponse = request.unwrapSuccess()
 
-        // Map each Driver to the corresponding person attribute
         personName = personDriver.map { $0.name }
         personGender = personDriver.map { $0.gender }
         personHeight = personDriver.map { $0.height }
         personHomeworld = planetResponse.map { $0.name }.asDriver(onErrorDriveWith: Driver.empty())
-
     }
-
 }

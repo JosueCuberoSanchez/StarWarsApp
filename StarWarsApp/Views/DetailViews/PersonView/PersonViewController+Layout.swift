@@ -15,10 +15,12 @@ extension PersonViewController {
     override func loadView() {
         super.loadView()
 
+        let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         view.addSubview(scrollView)
 
+        let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
 
@@ -28,6 +30,7 @@ extension PersonViewController {
         scrollView.addSubview(backgroundImageView)
         scrollView.sendSubviewToBack(backgroundImageView)
 
+        let personImageView = UIImageView(image: R.image.detailBb8())
         personImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(personImageView)
 
@@ -51,16 +54,11 @@ extension PersonViewController {
         homeworldLabel.textAlignment = .center
         contentView.addSubview(homeworldLabel)
 
-        portraitImageViewTopAnchorConstraints = [
-            personImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 180)
-        ]
-        landscapeImageViewTopAnchorConstraints = [
-            personImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 50)
-        ]
+        personImageViewTopAnchorConstraint =
+            personImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor)
 
         updateDynamicViewConstraints()
 
-        // Testing image slider with collection view
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -96,6 +94,7 @@ extension PersonViewController {
             backgroundImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             // Detail image view
             personImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            personImageViewTopAnchorConstraint,
             // Labels
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -131,18 +130,11 @@ extension PersonViewController {
         updateDynamicViewConstraints()
     }
 
-    /**
-     Updates the dynamic views according to the current orientation.
-     */
     func updateDynamicViewConstraints() {
-
         if UIDevice.current.orientation.isLandscape {
-            NSLayoutConstraint.activate(landscapeImageViewTopAnchorConstraints)
-            NSLayoutConstraint.deactivate(portraitImageViewTopAnchorConstraints)
+            personImageViewTopAnchorConstraint.constant = 145
         } else {
-            NSLayoutConstraint.activate(portraitImageViewTopAnchorConstraints)
-            NSLayoutConstraint.deactivate(landscapeImageViewTopAnchorConstraints)
+            personImageViewTopAnchorConstraint.constant = 30
         }
-
     }
 }

@@ -17,10 +17,6 @@ class PersonViewController: UIViewController, UIScrollViewDelegate, UICollection
     private var personViewModel: PersonViewModel!
     private let disposeBag = DisposeBag()
 
-    // Subviews
-    var scrollView = UIScrollView()
-    var contentView = UIView()
-    var personImageView = UIImageView(image: R.image.detailBb8())
     var nameLabel = UILabel()
     var genderLabel = UILabel()
     var heightLabel = UILabel()
@@ -33,13 +29,13 @@ class PersonViewController: UIViewController, UIScrollViewDelegate, UICollection
     let characterImages =
         [R.image.characters(), R.image.darkSide(), R.image.jedis(), R.image.robots(), R.image.resistance()]
 
-    // Dynamic constraints
-    var portraitImageViewTopAnchorConstraints: [NSLayoutConstraint]!
-    var landscapeImageViewTopAnchorConstraints: [NSLayoutConstraint]!
+    var personImageViewTopAnchorConstraint: NSLayoutConstraint!
 
     init(_ person: Person, _ apiClient: APIClient) {
         self.apiClient = apiClient
+        
         super.init(nibName: nil, bundle: nil)
+        
         personViewModel = PersonViewModel(
             request: { [weak self] in
                 guard let sself = self else { return Driver.empty() }
@@ -55,55 +51,45 @@ class PersonViewController: UIViewController, UIScrollViewDelegate, UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         setupBindings()
     }
 
-    /**
-     Bind the subviews data.
-     */
     private func setupBindings() {
-        /// Name
         personViewModel.personName
-            .asObservable()
             .map { R.string.localizable.name_format($0) }
-            .bind(to: nameLabel.rx.text)
+            .drive(nameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        /// Gender
         personViewModel.personGender
-            .asObservable()
             .map { R.string.localizable.gender_format($0.rawValue) }
-            .bind(to: genderLabel.rx.text)
+            .drive(genderLabel.rx.text)
             .disposed(by: disposeBag)
 
-        /// Height
         personViewModel.personHeight
-            .asObservable()
             .map { R.string.localizable.height_format($0) }
-            .bind(to: heightLabel.rx.text)
+            .drive(heightLabel.rx.text)
             .disposed(by: disposeBag)
 
-        /// Homeworld
         personViewModel.personHomeworld
-            .asObservable()
             .map { R.string.localizable.homeworld_format($0) }
-            .bind(to: homeworldLabel.rx.text)
+            .drive(homeworldLabel.rx.text)
             .disposed(by: disposeBag)
 
-        /// Slider scroll
-        collectionView.rx.didEndDecelerating
-            .subscribe(onNext: { [weak self] in
+        collectionView.rx.didEndDecelerating.asDriver()
+            .drive(onNext: { [weak self] in
                 if let xAxis = self?.collectionView.contentOffset.x {
                     self?.pagingControl.currentPage = Int(round(xAxis / 320))
                 }
             })
             .disposed(by: disposeBag)
 
-        Observable.timer(0, period: 5.0, scheduler: MainScheduler.instance)
-            .map { self.backgroundImages[$0 % self.backgroundImages.count] }
-            .subscribe(onNext: { [weak self] in
+        let backgroundImages = self.backgroundImages
+        Driver.timer(0, period: 5.0)
+            .map { backgroundImages[$0 % backgroundImages.count] }
+            .drive(onNext: { [weak self] in
                 if let nextBackgroundImage = $0 {
                     self?.backgroundImageView.setImageWithDissolveAnimation(nextBackgroundImage)
                 }
@@ -118,7 +104,8 @@ class PersonViewController: UIViewController, UIScrollViewDelegate, UICollection
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let cell = collectionView.dequeueReusableCell(with: SliderCollectionViewCell.self, for: indexPath),
-              let image = characterImages[indexPath.row] else {
+              let image = characterImages[indexPath.row]
+        else {
             return SliderCollectionViewCell()
         }
 

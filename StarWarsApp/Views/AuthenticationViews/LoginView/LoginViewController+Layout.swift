@@ -29,7 +29,6 @@ extension LoginViewController {
         blurEffectView.alpha = 0.7
         view.addSubview(blurEffectView)
 
-        //Stack View
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -38,34 +37,39 @@ extension LoginViewController {
         stackView.spacing = 16.0
         view.addSubview(stackView)
 
-        // Logo view
-        let logoView = UIImageView()
-        logoView.image = R.image.starWarsLogo()
+        let logoView = UIImageView(image: R.image.starWarsLogo())
+        stackView.addArrangedSubview(logoView)
 
-        // Email views
+        let emailView = UIView()
+        emailView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(emailView)
+        
         let emailLabel = UILabel()
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         emailLabel.setTypography(.label)
         emailLabel.text = "Email"
         emailLabel.textAlignment = .left
+        emailView.addSubview(emailLabel)
+        
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "Enter email"
         emailTextField.autocapitalizationType = .none
         emailTextField.layer.borderWidth = 1
         emailTextField.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         emailTextField.borderStyle = .roundedRect
-
-        let emailView = UIView()
-        emailView.translatesAutoresizingMaskIntoConstraints = false
-        emailView.addSubview(emailLabel)
         emailView.addSubview(emailTextField)
 
-        // Password views
+        let passwordView = UIView()
+        passwordView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(passwordView)
+        
         let passwordLabel = UILabel()
         passwordLabel.translatesAutoresizingMaskIntoConstraints = false
         passwordLabel.setTypography(.label)
         passwordLabel.text = "Password"
         passwordLabel.textAlignment = .left
+        passwordView.addSubview(passwordLabel)
+
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Enter password"
         passwordTextField.isSecureTextEntry = true
@@ -73,13 +77,8 @@ extension LoginViewController {
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         passwordTextField.borderStyle = .roundedRect
-
-        let passwordView = UIView()
-        passwordView.translatesAutoresizingMaskIntoConstraints = false
-        passwordView.addSubview(passwordLabel)
         passwordView.addSubview(passwordTextField)
 
-        // Button
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle("Log in", for: .normal)
         loginButton.titleLabel?.setTypography(.label)
@@ -88,11 +87,6 @@ extension LoginViewController {
         loginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         loginButton.layer.borderWidth = 1
         loginButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-
-        // Add views
-        stackView.addArrangedSubview(logoView)
-        stackView.addArrangedSubview(emailView)
-        stackView.addArrangedSubview(passwordView)
         stackView.addArrangedSubview(loginButton)
 
         NSLayoutConstraint.activate([
@@ -129,9 +123,6 @@ extension LoginViewController {
 
     }
 
-    /**
-     Set the text fields border to red when credentials are wrong.
-     */
     func setErrorBordersForInputFields() {
         emailTextField.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         passwordTextField.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)

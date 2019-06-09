@@ -11,7 +11,7 @@ import UIKit
 
 class SliderCollectionViewCell: UICollectionViewCell {
 
-    let imageView = UIImageView()
+    private let imageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)

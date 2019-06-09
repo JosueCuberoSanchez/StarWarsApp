@@ -14,46 +14,36 @@ class PeopleTableViewModel: BaseViewModel {
 
     typealias Model = Person
 
-    var pagination = BehaviorRelay<Int>(value: 1)
-    var activityIndicator = ActivityIndicator()
-    var itemsRelay = BehaviorRelay<[Model]>(value: [])
-    var nextPageTrigger = PublishRelay<Void>()
-    var filterSource = BehaviorRelay<String>(value: "")
-    var modelList: SharedSequence<DriverSharingStrategy, [Model]>
-    var maxPage = 10
+    let pagination = BehaviorRelay<Int>(value: 1)
+    let activityIndicator = ActivityIndicator()
+    let itemsRelay = BehaviorRelay<[Model]>(value: [])
+    let nextPageTrigger = PublishRelay<Void>()
+    let filterSource = BehaviorRelay<String>(value: "")
+    let modelList: SharedSequence<DriverSharingStrategy, [Model]>
+    let maxPage = 10
 
     private let disposeBag = DisposeBag()
 
     init(request: @escaping (_ page: Int) -> Driver<Response<PeopleResponse>>) {
 
         modelList = Driver.combineLatest(itemsRelay.asDriver(), filterSource.asDriver()) { data, filter in
-            data.filter { person in
-                guard filter != "" else {
-                    return true
-                }
-                return person.name.lowercased().contains(filter.lowercased())
+            data.filter {
+                guard filter != "" else { return true }
+                return $0.name.lowercased().contains(filter.lowercased())
             }
         }
 
         let activityIndicator = self.activityIndicator
-        
-        /* cuando este request comienza es por que el trigger lo dejo pasar por estar en F, 
-         entonces el track cambia el AI de F a V, para no dejar pasar a nadie mas.*/
-        let sharedRequest = pagination
-            .flatMap { request($0).trackActivity(activityIndicator) }.share()
-        /* cuando este request termina, el track activity se encargar de hacerle decrement 
-         al activity indicator, pasando de V a F*/
-        let peopleResponse = sharedRequest.mapSuccess()
+        let request = pagination.asDriver()
+            .flatMapLatest { request($0).trackActivity(activityIndicator).asDriver(onErrorDriveWith: Driver.empty()) }
+        let peopleResponse = request.unwrapSuccess()
 
-        peopleResponse.map { $0.people } // map people array to items relay
-            .withLatestFrom(itemsRelay) { $1 + $0 }
+        peopleResponse.map { $0.people }
+            .withLatestFrom(itemsRelay.asDriver()) { $1 + $0 }
             .asDriver(onErrorDriveWith: Driver.empty())
             .drive(itemsRelay)
             .disposed(by: disposeBag)
 
-        /* trigger for next page loads, triggers the first time because it has a value already.
-         next triggers are made by the view controller, and pagination changes (+1) making 
-         the shared request trigger the next page load.*/
         let maxPage = self.maxPage
         nextPageTrigger
             .withLatestFrom(activityIndicator)
@@ -63,7 +53,5 @@ class PeopleTableViewModel: BaseViewModel {
             .asDriver(onErrorDriveWith: Driver.empty())
             .drive(pagination)
             .disposed(by: disposeBag)
-
     }
-
 }

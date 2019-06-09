@@ -8,13 +8,17 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class SpeciesTableViewController: GenericTableViewController<SpeciesTableViewModel> {
 
     override func viewDidLoad() {
         viewModel =
             SpeciesTableViewModel(
-                request: { SpeciesResource($0).execute(with: self.apiClient, using: self.jsonDecoder) }
+                request: { [weak self] in
+                    guard let sself = self else { return Driver.empty() }
+                    return SpeciesResource($0).execute(with: sself.apiClient, using: sself.jsonDecoder)
+                }
             )
 
         super.viewDidLoad()

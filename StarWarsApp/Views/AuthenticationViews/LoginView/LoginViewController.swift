@@ -16,20 +16,21 @@ protocol LoginViewControllerDelegate: class {
 
 class LoginViewController: UIViewController {
 
-    var apiClient: APIClient!
-    var jsonDecoder: JSONDecoder!
-    var loginViewModel: LoginViewModel!
+    private var apiClient: APIClient!
+    private var jsonDecoder: JSONDecoder!
+    private var loginViewModel: LoginViewModel!
 
     var emailTextField = UITextField()
     var passwordTextField = UITextField()
     var loginButton = UIButton()
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     weak var delegate: LoginViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loginViewModel = LoginViewModel(
             request: { [weak self] in
                 guard let sself = self else { return Driver.empty() }
@@ -39,43 +40,27 @@ class LoginViewController: UIViewController {
         setupBindings()
     }
 
-    /**
-     Binds the inputs, button and login response.
-     */
     private func setupBindings() {
-        emailTextField.rx.text
-            .orEmpty
-            .bind(to: loginViewModel.email)
-//            .subscribe(onNext: { [weak self] in
-//                self?.loginViewModel.email.accept($0)
-//            })
+        emailTextField.rx.text.orEmpty
+            .asDriver()
+            .drive(loginViewModel.email)
             .disposed(by: disposeBag)
 
-        passwordTextField.rx.text
-            .orEmpty
-            .subscribe(onNext: { [weak self] in
-                self?.loginViewModel.password.accept($0)
-            })
+        passwordTextField.rx.text.orEmpty
+            .asDriver()
+            .drive(loginViewModel.password)
             .disposed(by: disposeBag)
 
-        loginButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.loginViewModel.loginTrigger.accept(())
-            })
+        loginButton.rx.tap.asDriver()
+            .drive(loginViewModel.loginTrigger)
             .disposed(by: disposeBag)
 
         loginViewModel.loginFailure
-            .drive(onNext: { [weak self] error in
-                print(error.localizedDescription)
-                self?.setErrorBordersForInputFields()
-            })
+            .drive(onNext: { [weak self] _ in self?.setErrorBordersForInputFields() })
             .disposed(by: disposeBag)
 
         loginViewModel.loginSuccess
-            .drive(onNext: { [weak self] user in
-                print("Welcome \(user.firstName) \(user.lastName)")
-                self?.delegate?.didSuccessfullyLogin()
-            })
+            .drive(onNext: { [weak self] _ in self?.delegate?.didSuccessfullyLogin() })
             .disposed(by: disposeBag)
     }
 

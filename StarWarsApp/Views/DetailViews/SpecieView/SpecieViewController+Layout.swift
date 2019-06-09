@@ -15,10 +15,12 @@ extension SpecieViewController {
     override func loadView() {
         super.loadView()
 
+        let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         view.addSubview(scrollView)
 
+        let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
 
@@ -28,6 +30,7 @@ extension SpecieViewController {
         scrollView.addSubview(backgroundImageView)
         scrollView.sendSubviewToBack(backgroundImageView)
 
+        let specieImageView = UIImageView(image: R.image.detailRebelAlliance())
         specieImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(specieImageView)
 
@@ -56,12 +59,8 @@ extension SpecieViewController {
         homeworldLabel.textAlignment = .center
         contentView.addSubview(homeworldLabel)
 
-        portraitImageViewTopAnchorConstraints = [
-            specieImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 145)
-        ]
-        landscapeImageViewTopAnchorConstraints = [
-            specieImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 50)
-        ]
+        specieImageViewTopAnchorConstraint =
+            specieImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor)
 
         updateDynamicViewConstraints()
 
@@ -84,6 +83,7 @@ extension SpecieViewController {
             backgroundImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             // Detail image view
             specieImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            specieImageViewTopAnchorConstraint,
             // Labels
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -114,18 +114,11 @@ extension SpecieViewController {
         updateDynamicViewConstraints()
     }
 
-    /**
-     Updates the dynamic views according to the current orientation.
-     */
     func updateDynamicViewConstraints() {
-
         if UIDevice.current.orientation.isLandscape {
-            NSLayoutConstraint.activate(landscapeImageViewTopAnchorConstraints)
-            NSLayoutConstraint.deactivate(portraitImageViewTopAnchorConstraints)
+            specieImageViewTopAnchorConstraint.constant = 145
         } else {
-            NSLayoutConstraint.activate(portraitImageViewTopAnchorConstraints)
-            NSLayoutConstraint.deactivate(landscapeImageViewTopAnchorConstraints)
+            specieImageViewTopAnchorConstraint.constant = 30
         }
-
     }
 }

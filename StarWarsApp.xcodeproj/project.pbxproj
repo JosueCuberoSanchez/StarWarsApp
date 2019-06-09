@@ -55,6 +55,8 @@
 		CAA828B121EE79CA00027BAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA828B021EE79CA00027BAD /* LaunchScreen.storyboard */; };
 		CAA828C321EE7D5400027BAD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAA828C121EE7D5400027BAD /* Localizable.strings */; };
 		CAB8A2AF22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB8A2AE22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift */; };
+		CAB8A2B122AC8F3A00401E3D /* ObservableType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB8A2B022AC8F3A00401E3D /* ObservableType+Extensions.swift */; };
+		CAB8A2B322AC90CF00401E3D /* SharedSequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB8A2B222AC90CF00401E3D /* SharedSequence+Extensions.swift */; };
 		CAC4421821FA735A00D9EEEA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4421721FA735A00D9EEEA /* TabBarViewController.swift */; };
 		CAC4421D21FB458C00D9EEEA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4421C21FB458C00D9EEEA /* LoginViewController.swift */; };
 		CAC4421F21FB677000D9EEEA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4421E21FB677000D9EEEA /* LoginViewModel.swift */; };
@@ -157,6 +159,8 @@
 		CAA828B021EE79CA00027BAD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CAA828C221EE7D5400027BAD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CAB8A2AE22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrimitiveSequence+Extensions.swift"; sourceTree = "<group>"; };
+		CAB8A2B022AC8F3A00401E3D /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extensions.swift"; sourceTree = "<group>"; };
+		CAB8A2B222AC90CF00401E3D /* SharedSequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedSequence+Extensions.swift"; sourceTree = "<group>"; };
 		CAC4421721FA735A00D9EEEA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CAC4421C21FB458C00D9EEEA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CAC4421E21FB677000D9EEEA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -435,6 +439,8 @@
 				CA84F218220098F000A9B440 /* UICollectionView+RegisterDequeue.swift */,
 				CA84F2292200EDD700A9B440 /* Class+Name.swift */,
 				CAB8A2AE22AC4DE300401E3D /* PrimitiveSequence+Extensions.swift */,
+				CAB8A2B022AC8F3A00401E3D /* ObservableType+Extensions.swift */,
+				CAB8A2B222AC90CF00401E3D /* SharedSequence+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -909,6 +915,7 @@
 				CAC4421821FA735A00D9EEEA /* TabBarViewController.swift in Sources */,
 				CAC816CF21E4EB6700EB3D8D /* APIClient.swift in Sources */,
 				CA12BA2921E3A8AB00DF6CC5 /* Specie.swift in Sources */,
+				CAB8A2B322AC90CF00401E3D /* SharedSequence+Extensions.swift in Sources */,
 				CA12BA2521E3A4A400DF6CC5 /* Person.swift in Sources */,
 				CA752CB121F21FA300B4C3F3 /* PlanetResource.swift in Sources */,
 				CAE2B55321F77D90003E7043 /* SpeciesResource.swift in Sources */,
@@ -925,6 +932,7 @@
 				CA83D53E21E7FDE900EBC98C /* PlanetResponse.swift in Sources */,
 				CA752CC221F27F3C00B4C3F3 /* String+Utilities.swift in Sources */,
 				CAE2B54F21F76B9F003E7043 /* StarshipsResource.swift in Sources */,
+				CAB8A2B122AC8F3A00401E3D /* ObservableType+Extensions.swift in Sources */,
 				CA12BA3821E3AC1600DF6CC5 /* SpeciesTableViewModel.swift in Sources */,
 				CA84F2272200C93400A9B440 /* PeopleTableViewController.swift in Sources */,
 				CA84F233220261D500A9B440 /* TabBarCoordinator.swift in Sources */,

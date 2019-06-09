@@ -13,7 +13,7 @@ protocol AuthenticationCoordinatorDelegate: class {
     func coordinatorDidAuthenticate(coordinator: AuthenticationCoordinator)
 }
 
-final class AuthenticationCoordinator: Coordinator {
+final class AuthenticationCoordinator: Coordinator, LoginViewControllerDelegate {
 
     var childCoordinators = [Coordinator]()
 
@@ -41,11 +41,7 @@ final class AuthenticationCoordinator: Coordinator {
         // In a full programmatic way, I should present or show the VC here.
         // Also, if I would have to instantiate it here, I could inject it's VM.
     }
-
-}
-
-extension AuthenticationCoordinator: LoginViewControllerDelegate {
-
+    
     func didSuccessfullyLogin() {
         delegate?.coordinatorDidAuthenticate(coordinator: self)
     }

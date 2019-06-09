@@ -14,7 +14,10 @@ class StarshipsTableViewController: GenericTableViewController<StarshipsTableVie
 
     override func viewDidLoad() {
         viewModel = StarshipsTableViewModel(
-            request: { StarshipsResource($0).execute(with: self.apiClient, using: self.jsonDecoder) }
+            request: { [weak self] in
+                guard let sself = self else { return Driver.empty() }
+                return StarshipsResource($0).execute(with: sself.apiClient, using: sself.jsonDecoder)
+            }
         )
 
         super.viewDidLoad()

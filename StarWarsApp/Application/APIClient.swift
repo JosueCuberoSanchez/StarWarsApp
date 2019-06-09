@@ -18,10 +18,6 @@ final class APIClient {
         self.baseURL = baseURL
     }
 
-    /**
-     Executes a network request.
-     - Returns: An observable of HTTPResponse containing all the data from the server response.
-     */
     func execute(_ resource: Resource) -> Observable<HTTPResponse> {
 
         return Observable<HTTPResponse>.create { [weak self] observer in
@@ -44,10 +40,6 @@ final class APIClient {
         }
     }
 
-    /**
-     Builds a URLRequest based on a baseURL, path and parameters.
-     - Returns: The built URL request.
-     */
     func buildRequest(_ resource: Resource) -> URLRequest? {
 
         guard let builtURL = URL(string: baseURL),

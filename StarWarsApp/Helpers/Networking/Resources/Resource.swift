@@ -32,18 +32,10 @@ protocol Request: Resource {
 }
 
 extension Request where Value: Decodable {
-
-    /**
-     Executes a resource.
-     - Returns: A driver of <Response<Value>> where Value is the proper response model.
-     */
     func execute(with apiClient: APIClient, using decoder: JSONDecoder) -> Driver<Response<Value>> {
-        return
-            apiClient.execute(self) // Observable<HTTPResponse>
-                .filterSuccesfulStatusCodes() // Observable<HTTPResponse> where 200<=SC>=299
-                .mapModel(Value.self, decoder) // Observable<Value>
-                .wrapSuccess() // Observable<Response<Value>>
-                .asDriver(onErrorRecover: { Driver<Response<Value>>.just(Response.failure($0)) })
+        return apiClient.execute(self)
+            .filterSuccesfulStatusCodes()
+            .mapModel(Value.self, decoder)
+            .wrapSuccess()
     }
-
 }

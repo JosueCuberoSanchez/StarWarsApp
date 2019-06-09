@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 class SpecieViewModel {
-
     // Inputs
     private var specieDriver: Driver<Specie>
 
@@ -23,25 +22,18 @@ class SpecieViewModel {
     var specieHomeworld: Driver<String>
 
     init(request: @escaping (_ planetPath: String) -> Driver<Response<PlanetResponse>>, specie: Specie) {
+        specieDriver = Driver.just(specie)
 
-        // Asign personDriver
-        specieDriver = Driver.of(specie)
-
-        // Map homeworld driver
-        let sharedRequest = specieDriver
+        let request = specieDriver
             .map { $0.homeworld?.resourcePath }
             .filterNil()
-            .flatMap { request($0) }
-            // Droid specie has a null homeworld
-        let planetResponse = sharedRequest.asObservable().mapSuccess()
+            .flatMapLatest { request($0) }
+        let planetResponse = request.unwrapSuccess()
 
-        // Map each Driver to the corresponding person attribute
         specieName = specieDriver.map { $0.name }
         specieClassification = specieDriver.map { $0.classification }
         specieAverageHeight = specieDriver.map { $0.averageHeight }
         specieLanguage = specieDriver.map { $0.language }
         specieHomeworld = planetResponse.map { $0.name }.asDriver(onErrorDriveWith: Driver.empty())
-
     }
-
 }

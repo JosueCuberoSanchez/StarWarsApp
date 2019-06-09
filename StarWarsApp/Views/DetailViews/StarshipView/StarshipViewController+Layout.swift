@@ -15,10 +15,12 @@ extension StarshipViewController {
     override func loadView() {
         super.loadView()
 
+        let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         view.addSubview(scrollView)
 
+        let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
 
@@ -28,6 +30,7 @@ extension StarshipViewController {
         scrollView.addSubview(backgroundImageView)
         scrollView.sendSubviewToBack(backgroundImageView)
 
+        let starshipImageView = UIImageView(image: R.image.detailDeathStar())
         starshipImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(starshipImageView)
 
@@ -57,13 +60,9 @@ extension StarshipViewController {
         classLabel.textAlignment = .center
         classLabel.numberOfLines = 2
         contentView.addSubview(classLabel)
-
-        portraitImageViewTopAnchorConstraints = [
-            starshipImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 145)
-        ]
-        landscapeImageViewTopAnchorConstraints = [
-            starshipImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 50)
-        ]
+        
+        starshipImageViewTopAnchorConstraint =
+            starshipImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor)
 
         updateDynamicViewConstraints()
 
@@ -86,6 +85,7 @@ extension StarshipViewController {
             backgroundImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             // Detail image
             starshipImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            starshipImageViewTopAnchorConstraint,
             // Labels
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -120,14 +120,10 @@ extension StarshipViewController {
      Updates the dynamic views according to the current orientation.
      */
     func updateDynamicViewConstraints() {
-
         if UIDevice.current.orientation.isLandscape {
-            NSLayoutConstraint.activate(landscapeImageViewTopAnchorConstraints)
-            NSLayoutConstraint.deactivate(portraitImageViewTopAnchorConstraints)
+            starshipImageViewTopAnchorConstraint.constant = 145
         } else {
-            NSLayoutConstraint.activate(portraitImageViewTopAnchorConstraints)
-            NSLayoutConstraint.deactivate(landscapeImageViewTopAnchorConstraints)
+            starshipImageViewTopAnchorConstraint.constant = 50
         }
-
     }
 }

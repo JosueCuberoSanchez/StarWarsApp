@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxOptional
+import RxCocoa
 
 extension PrimitiveSequence where Trait == SingleTrait, Element: OptionalType {
     public func filterNil() -> PrimitiveSequence<Trait, Element.Wrapped> {

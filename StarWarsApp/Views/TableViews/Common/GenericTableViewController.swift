@@ -24,19 +24,18 @@ class GenericTableViewController<VM: BaseViewModel>: UITableViewController {
 
     override func loadView() {
         super.loadView()
+        
         setupLoadingScreen(loadingScreenView)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadingScreenView.showLoadingScreen()
         setupTableView()
         setupTableViewBindings()
     }
 
-    /**
-     Sets up the table view delegates and data source.
-     */
     func setupTableView() {
         tableView.dataSource = nil
         tableView.delegate = nil
@@ -45,7 +44,6 @@ class GenericTableViewController<VM: BaseViewModel>: UITableViewController {
     }
 
     private func setupTableViewBindings() {
-
         viewModel.modelList
             // swiftlint:disable:next line_length
             .drive(tableView.rx.items(cellIdentifier: R.reuseIdentifier.tabListTableViewCell.identifier, cellType: TabListTableViewCell.self)) { [ weak self ] (row, element, cell) in
@@ -54,40 +52,27 @@ class GenericTableViewController<VM: BaseViewModel>: UITableViewController {
             }
             .disposed(by: disposeBag)
 
-        tableView.rx.reachedBottom
-            .bind(to: viewModel.nextPageTrigger)
+        tableView.rx.reachedBottom.asDriver()
+            .drive(viewModel.nextPageTrigger)
             .disposed(by: disposeBag)
 
-        searchBar.rx.text
-            .orEmpty
+        searchBar.rx.text.orEmpty
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .bind(to: viewModel.filterSource)
+            .asDriver(onErrorDriveWith: Driver.empty())
+            .drive(viewModel.filterSource)
             .disposed(by: disposeBag)
-
     }
 
-    /**
-     Sets up the loading screen.
-     */
     func setupLoadingScreen(_ loadingScreenView: LoadingScreenView) {
-
         view.addSubview(loadingScreenView)
 
         NSLayoutConstraint.activate([
             loadingScreenView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadingScreenView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-
     }
 
-    /**
-     Customize each PersonCell with the corresponding data and style
-     - Parameter cell: The cell that will be modified
-     - Parameter row: The cell row number
-     - Parameter element: The model corresponding to the cell
-     */
     func customizeCell(_ cell: TabListTableViewCell, _ row: Int, _ model: VM.Model) {
-
         if row % 2 == 0 {
             cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         } else {
@@ -97,31 +82,20 @@ class GenericTableViewController<VM: BaseViewModel>: UITableViewController {
         cell.accessoryType = .disclosureIndicator
 
         setCellLabelContents(cell, model)
-
     }
 
-    /**
-     Sets the cell label text contents.
-     - Parameter cell: the cell to be set.
-     - Parameter model: the model.
-     */
     func setCellLabelContents(_ cell: TabListTableViewCell, _ model: VM.Model) {}
-
 }
 
 extension GenericTableViewController: DependenciesInjection {
-
     func setDependencies(apiClient: APIClient, jsonDecoder: JSONDecoder) {
         self.apiClient = apiClient
         self.jsonDecoder = jsonDecoder
     }
-
 }
 
 extension GenericTableViewController: TabBarDelegateInjection {
-
     func setDelegate(_ delegate: TabBarControllerDelegate) {
         self.delegate = delegate
     }
-
 }

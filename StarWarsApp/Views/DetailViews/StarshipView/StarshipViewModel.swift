@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 class StarshipViewModel {
-
     // Inputs
     private var starshipDriver: Driver<Starship>
 
@@ -23,15 +22,12 @@ class StarshipViewModel {
     var starshipClass: Driver<String>
 
     init(starship: Starship) {
-
-        starshipDriver = Driver.of(starship)
+        starshipDriver = Driver.just(starship)
 
         starshipName = starshipDriver.map { $0.name }
         starshipManufacturer = starshipDriver.map { $0.manufacturer }
         starshipLength = starshipDriver.map { $0.length }
         starshipPassengers = starshipDriver.map { $0.passengers }
         starshipClass = starshipDriver.map { $0.starshipClass }
-
     }
-
 }
